@@ -1,0 +1,2 @@
+overrides:
+  swt-serverless-api: link:../../../../Library/pnpm/global/5/node_modules/swt-serverless-api

@@ -1,0 +1,27 @@
+{
+	"name": "hono-zod-api-worker",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev",
+		"start": "wrangler dev",
+		"test": "vitest",
+		"typegen": "wrangler types"
+	},
+	"devDependencies": {
+		"@cloudflare/vitest-pool-workers": "^0.8.19",
+		"@types/node": "^24.8.1",
+		"prettier": "^3.6.2",
+		"prettier-plugin-organize-imports": "^4.3.0",
+		"typescript": "^5.5.2",
+		"vitest": "~3.2.0",
+		"wrangler": "^4.44.0"
+	},
+	"dependencies": {
+		"hono": "^4.10.1",
+		"reflect-metadata": "^0.2.2",
+		"swt-serverless-api": "link:../../../../Library/pnpm/global/5/node_modules/swt-serverless-api",
+		"zod": "^4.1.12"
+	}
+}
