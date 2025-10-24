@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query } from 'swt-serverless-api';
+import z from 'zod';
 import { CommonError } from '../../middlewares/error.middleware';
 import type { CreateTodoInput, PaginateInput, UpdateTodoInput } from './todo.dto';
 import { createTodoSchema, paginateSchema, updateTodoSchema } from './todo.dto';
@@ -14,7 +15,13 @@ export class TodoController {
 	}
 
 	@Get('/:id')
-	async getTodoById(@Param('id') id: string) {
+	async getTodoById(
+		@Param({
+			name: 'id',
+			schema: z.coerce.number().min(0),
+		})
+		id: number,
+	) {
 		const todo = mockTodos.find((t) => t.id === id);
 		if (todo) {
 			return todo;
@@ -34,7 +41,14 @@ export class TodoController {
 	}
 
 	@Put('/:id')
-	updateTodo(@Param('id') id: string, @Body(updateTodoSchema) body: UpdateTodoInput) {
+	updateTodo(
+		@Param({
+			name: 'id',
+			schema: z.string().min(0),
+		})
+		id: string,
+		@Body(updateTodoSchema) body: UpdateTodoInput,
+	) {
 		const todo = mockTodos.find((t) => t.id === id);
 		if (!todo) {
 			throw new CommonError(404, 'Todo not found');
@@ -48,7 +62,13 @@ export class TodoController {
 	}
 
 	@Delete('/:id')
-	deleteTodo(@Param('id') id: string) {
+	deleteTodo(
+		@Param({
+			name: 'id',
+			schema: z.coerce.number().min(0),
+		})
+		id: number,
+	) {
 		const index = mockTodos.findIndex((t) => t.id === id);
 		if (index === -1) {
 			throw new CommonError(404, 'Todo not found');

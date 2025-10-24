@@ -1,0 +1,56 @@
+import { type HttpMethod, type IntrospectionObject, type MethodSchemas, type ParamDefinition } from '../types';
+import { cleanSchemaForIntrospection } from '../utils/common-utils';
+
+export function processIntrospection(
+	handlerName: string,
+	method: HttpMethod,
+	paramDefs: ParamDefinition[],
+	path: string,
+	schemas?: MethodSchemas,
+): IntrospectionObject {
+	const paramSchemas = [];
+	const querySchemas = [];
+	const bodySchemas = [];
+	const headerSchemas = [];
+	for (const p of paramDefs) {
+		if (p.schema && p.type === 'param') {
+			paramSchemas.push(cleanSchemaForIntrospection(p.schema, p.name));
+		}
+		if (p.type === 'query' && p.schema) {
+			querySchemas.push(cleanSchemaForIntrospection(p.schema, p.name));
+		}
+		if (p.type === 'body' && p.schema) {
+			bodySchemas.push(cleanSchemaForIntrospection(p.schema));
+		}
+		if (p.type === 'header' && p.schema) {
+			headerSchemas.push(cleanSchemaForIntrospection(p.schema, p.name));
+		}
+	}
+
+	if (schemas?.params) {
+		paramSchemas.push(cleanSchemaForIntrospection(schemas.params));
+	}
+	if (schemas?.query) {
+		querySchemas.push(cleanSchemaForIntrospection(schemas.query));
+	}
+	if (schemas?.body) {
+		bodySchemas.push(cleanSchemaForIntrospection(schemas.body));
+	}
+	if (schemas?.headers) {
+		headerSchemas.push(cleanSchemaForIntrospection(schemas.headers));
+	}
+
+	const newRouteIntrospection = {
+		name: handlerName,
+		method: method,
+		path: path,
+		schema: {
+			body: bodySchemas,
+			query: querySchemas,
+			params: paramSchemas,
+			headers: headerSchemas,
+		},
+	};
+
+	return newRouteIntrospection;
+}

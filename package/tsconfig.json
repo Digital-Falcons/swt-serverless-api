@@ -11,8 +11,9 @@
 		"target": "es2021",
 		"lib": ["ES2021"],
 		"typeRoots": ["./node_modules/@types", "./src/types"],
-		"types": [], // Keep this empty or remove it
+		"types": ["node"], // Keep this empty or remove it
 		"moduleResolution": "node",
+
 		// For nodejs:
 		// "lib": ["esnext"],
 		// "types": ["node"],
@@ -48,5 +49,6 @@
 		"emitDecoratorMetadata": true,
 
 		"allowSyntheticDefaultImports": true
-	}
+	},
+	"exclude": ["vite.config.ts", "dist", "node_modules"]
 }

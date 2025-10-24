@@ -13,13 +13,12 @@ const app = buildHonoApp([TodoController], {
 			middlewares: [AuthMiddleware],
 		},
 	],
-	notFoundHandler: async () => {
-		return new Response(JSON.stringify({ message: 'Resource Not Found' }), {
-			status: 404,
-			headers: { 'Content-Type': 'application/json' },
-		});
+	notFoundHandler: async (c) => {
+		return c.json({ message: 'Resource Not Found' }, 404);
 	},
 	onError: ErrorMiddleware,
+	enableIntrospection: true,
+	introspectionPath: '/introspect',
 });
 
 export default class extends WorkerEntrypoint {

@@ -1,7 +1,8 @@
 import type { MiddlewareHandler } from 'hono';
 import 'reflect-metadata';
+import { ZodObject } from 'zod';
 import { META_KEYS } from './constants';
-import type { Constructor, HttpMethod, MethodSchemas, ParamDefinition } from './types';
+import type { Constructor, DecoratorOptions, HttpMethod, MethodSchemas, ParamDefinition } from './types';
 
 // Controller decorator
 export function Controller(basePath = '', ...middlewares: MiddlewareHandler[]) {
@@ -51,6 +52,7 @@ function createRouteDecorator(method: HttpMethod) {
 			const schemas = (Reflect.getMetadata(META_KEYS.method.schemas, target, propertyKey) || undefined) as MethodSchemas | undefined;
 
 			const route = {
+				handlerName: propertyKey.toString(),
 				method,
 				path,
 				propertyKey,
@@ -77,63 +79,38 @@ function addParamMetadata(target: any, propertyKey: string | symbol, meta: Param
 	Reflect.defineMetadata(META_KEYS.params, [...existing, meta], target, propertyKey);
 }
 
-export function Body(schema?: any) {
+export function Body(schema?: ZodObject) {
 	return function (target: any, propertyKey: string | symbol, parameterIndex: number) {
-		addParamMetadata(target, propertyKey, {
-			index: parameterIndex,
-			type: 'body',
-			schema,
-		});
+		addParamMetadata(target, propertyKey, { index: parameterIndex, type: 'body', schema });
 	};
 }
 
 export function Query({ name, schema }: { name?: string; schema?: any }) {
 	return function (target: any, propertyKey: string | symbol, parameterIndex: number) {
-		addParamMetadata(target, propertyKey, {
-			index: parameterIndex,
-			type: 'query',
-			name,
-			schema,
-		});
+		addParamMetadata(target, propertyKey, { index: parameterIndex, type: 'query', name, schema });
 	};
 }
 
-export function Param(name: string, schema?: any) {
+export function Param(props: DecoratorOptions) {
 	return function (target: any, propertyKey: string | symbol, parameterIndex: number) {
-		addParamMetadata(target, propertyKey, {
-			index: parameterIndex,
-			type: 'param',
-			name,
-			schema,
-		});
+		addParamMetadata(target, propertyKey, { index: parameterIndex, type: 'param', ...props });
 	};
 }
 
-export function Header({ name, schema }: { name?: string; schema?: any }) {
+export function Header(props: DecoratorOptions) {
 	return function (target: any, propertyKey: string | symbol, parameterIndex: number) {
-		addParamMetadata(target, propertyKey, {
-			index: parameterIndex,
-			type: 'header',
-			name,
-			schema,
-		});
+		addParamMetadata(target, propertyKey, { index: parameterIndex, type: 'header', ...props });
 	};
 }
 
 export function Ctx() {
 	return function (target: any, propertyKey: string | symbol, parameterIndex: number) {
-		addParamMetadata(target, propertyKey, {
-			index: parameterIndex,
-			type: 'ctx',
-		});
+		addParamMetadata(target, propertyKey, { index: parameterIndex, type: 'ctx' });
 	};
 }
 
 export function Req() {
 	return function (target: any, propertyKey: string | symbol, parameterIndex: number) {
-		addParamMetadata(target, propertyKey, {
-			index: parameterIndex,
-			type: 'req',
-		});
+		addParamMetadata(target, propertyKey, { index: parameterIndex, type: 'req' });
 	};
 }
