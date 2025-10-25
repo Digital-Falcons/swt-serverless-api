@@ -10,18 +10,15 @@ const outDir = argv.outDir || './generated';
 const introspectURL = argv.url || 'http://localhost:8787/introspect';
 const baseURL = argv.baseURL || 'http://localhost:8787';
 
-if (!folderExists(outDir)) {
-	console.log('\x1b[33m', `Folder at ${outDir} not exist, create new one.`);
-	mkdirSync(outDir);
-} else {
-	console.log('\x1b[36m', `Folder at ${outDir} exists.`);
-}
-
 fetch(introspectURL)
 	.then((res) => res.json() as Promise<IntrospectionObject[]>)
 	.then((introspectionObjects) => {
-		console.log(JSON.stringify(introspectionObjects, null, 2));
-
+		if (!folderExists(outDir)) {
+			console.log('\x1b[33m', `Folder at ${outDir} not exist, create new one.`);
+			mkdirSync(outDir);
+		} else {
+			console.log('\x1b[36m', `Folder at ${outDir} exists.`);
+		}
 		introspectionObjects.forEach((obj, id) => {
 			const bruno = new BrunoRequest(
 				{

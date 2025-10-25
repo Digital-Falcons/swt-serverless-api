@@ -10,7 +10,7 @@
 	],
 	"main": "./dist/index.js",
 	"bin": {
-		"gen-bruno": "./dist/cli/cli/generate-bruno.js"
+		"gen-bruno": "./dist/cli/generate-bruno.js"
 	},
 	"type": "module",
 	"scripts": {
@@ -18,7 +18,7 @@
 		"build:package": "vite build --ssr src/index.ts --outDir dist/package",
 		"build:cli": "tsc --outDir dist/cli src/cli/generate-bruno.ts",
 		"build:dev": "tsc",
-		"build": "pnpm run remove-dist && pnpm run build:package && pnpm run build:cli"
+		"build": "pnpm run remove-dist && tsc"
 	},
 	"keywords": [
 		"serverless",

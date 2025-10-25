@@ -8,7 +8,7 @@
 		"start": "wrangler dev",
 		"test": "vitest",
 		"typegen": "wrangler types",
-		"gen-bruno": "pnpm swt-serverless-api gen-bruno"
+		"gen-spec": "pnpm gen-bruno"
 	},
 	"devDependencies": {
 		"@cloudflare/vitest-pool-workers": "^0.8.19",
