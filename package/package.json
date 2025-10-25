@@ -30,7 +30,7 @@
 	"author": "sw-tech",
 	"repository": {
 		"type": "git",
-		"url": "git+git@github.com:quanglochuynh/swt-serverless-api.git",
+		"url": "git+git@github.com:Digital-Falcons/swt-serverless-api.git",
 		"directory": "package"
 	},
 	"license": "Apache-2.0",
