@@ -93,12 +93,6 @@ export function buildHonoApp(controllers: AnyController[], options?: BuildOption
 		}
 	}
 
-	app.get('/', (c) => {
-		return c.json({
-			message: 'Welcome to the Hono Zod API Worker!',
-		});
-	});
-
 	if (options?.enableIntrospection) {
 		app.get(options.introspectionPath || '/introspection', (c) => {
 			return c.json(introspectionArray);
