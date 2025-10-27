@@ -3,6 +3,7 @@ import { Hono } from 'hono';
 import 'reflect-metadata';
 import { joinPath, META_KEYS } from './constants';
 import { processIntrospection } from './introspect/process-introspect';
+import { ErrorMiddleware } from './middlewares/error.middleware';
 import type { BuildOptions, Constructor, HttpMethod, IntrospectionObject, ParamDefinition, RouteDefinition } from './types';
 import { createRouteHandler } from './utils/create-handler';
 
@@ -106,6 +107,8 @@ export function buildHonoApp(controllers: AnyController[], options?: BuildOption
 
 	if (options?.onError) {
 		app.onError(options?.onError);
+	} else {
+		app.onError(ErrorMiddleware);
 	}
 
 	if (options?.notFoundHandler) {

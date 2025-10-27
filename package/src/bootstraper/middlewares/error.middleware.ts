@@ -1,4 +1,5 @@
-import { ErrorHandler } from 'hono';
+import { type ErrorHandler } from 'hono';
+import { HTTPException } from 'hono/http-exception';
 
 export class CommonError extends Error {
 	constructor(
@@ -10,25 +11,33 @@ export class CommonError extends Error {
 	}
 }
 
-interface ErrorResponse {
-	success: boolean;
-	message: string;
-	status?: number;
-	name?: string;
-}
-
-interface Context {
-	json: (body: ErrorResponse, status?: number) => Promise<Response>;
+function safeParseJson(object: any) {
+	try {
+		return JSON.parse(object);
+	} catch {
+		return null;
+	}
 }
 
 export const ErrorMiddleware: ErrorHandler = async (err, c) => {
+	if (err instanceof HTTPException) {
+		return c.json(
+			{
+				success: false,
+				message: [err.message, err.res?.statusText].filter(Boolean).join(' - ') || 'HTTP Error',
+				status: err.status,
+			},
+			err.status,
+		);
+	}
+
 	if (err.name === 'ZodError') {
 		return c.json(
 			{
 				success: false,
 				message: 'Validation error',
 				status: 400,
-				errors: err.message,
+				errors: safeParseJson(err.message),
 			},
 			400,
 		);

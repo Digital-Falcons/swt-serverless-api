@@ -1,22 +1,19 @@
 import { WorkerEntrypoint } from 'cloudflare:workers';
 import 'reflect-metadata';
-import { buildHonoApp } from 'swt-serverless-api';
+import { buildHonoApp, createBearerAuthMiddleware } from 'swt-serverless-api';
 import { TodoController } from './features/todos/todo.controller';
-import { AuthMiddleware } from './middlewares/auth.middleware';
-import { ErrorMiddleware } from './middlewares/error.middleware';
 
 const app = buildHonoApp([TodoController], {
 	base: '/',
 	topMiddlewares: [
 		{
 			path: '/int/*',
-			middlewares: [AuthMiddleware],
+			middlewares: [createBearerAuthMiddleware('BEARER_TOKEN')],
 		},
 	],
 	notFoundHandler: async (c) => {
 		return c.json({ message: 'Resource Not Found' }, 404);
 	},
-	onError: ErrorMiddleware,
 	enableIntrospection: true,
 	introspectionPath: '/introspect',
 });
