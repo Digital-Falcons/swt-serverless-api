@@ -1,6 +1,6 @@
 {
 	"name": "swt-serverless-api",
-	"version": "0.0.5-beta",
+	"version": "0.0.6-beta",
 	"private": false,
 	"description": "Bootstrap a serverless API using Hono framework with TypeScript and Zod for validation.",
 	"licenses": [

@@ -119,6 +119,10 @@ export function createRouteHandler(
 						args[p.index] = c.get(p.name);
 						break;
 					}
+					case 'env': {
+						args[p.index] = c.env[p.name!];
+						break;
+					}
 				}
 			}
 

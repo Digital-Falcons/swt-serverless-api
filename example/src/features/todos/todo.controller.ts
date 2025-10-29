@@ -1,4 +1,4 @@
-import { Body, CommonError, Controller, Delete, Get, HttpCode, Param, Post, Put, Query } from 'swt-serverless-api';
+import { Body, CommonError, Controller, Delete, Env, Get, HttpCode, Param, Post, Put, Query } from 'swt-serverless-api';
 import z from 'zod';
 import type { CreateTodoInput, PaginateInput, UpdateTodoInput } from './todo.dto';
 import { createTodoSchema, paginateSchema, updateTodoSchema } from './todo.dto';
@@ -30,7 +30,7 @@ export class TodoController {
 
 	@Post()
 	@HttpCode(201)
-	createTodo(@Body(createTodoSchema) body: CreateTodoInput) {
+	createTodo(@Body(createTodoSchema) body: CreateTodoInput, @Env('DB') db: string) {
 		const newTodo = { id: String(mockTodos.length + 1), ...body, completed: false };
 		mockTodos.push(newTodo);
 		return {

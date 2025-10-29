@@ -120,3 +120,9 @@ export function CtxGet(key: string) {
 		addParamMetadata(target, propertyKey, { index: parameterIndex, type: 'ctx.get', name: key });
 	};
 }
+
+export function Env(key: string) {
+	return function (target: any, propertyKey: string | symbol, parameterIndex: number) {
+		addParamMetadata(target, propertyKey, { index: parameterIndex, type: 'env', name: key });
+	};
+}
