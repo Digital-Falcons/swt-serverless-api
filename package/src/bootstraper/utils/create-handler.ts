@@ -115,6 +115,10 @@ export function createRouteHandler(
 						}
 						break;
 					}
+					case 'ctx.get': {
+						args[p.index] = c.get(p.name);
+						break;
+					}
 				}
 			}
 

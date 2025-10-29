@@ -5,7 +5,7 @@ export type Constructor<T = any> = new (...args: any[]) => T;
 
 export type HttpMethod = 'get' | 'post' | 'put' | 'patch' | 'delete' | 'options' | 'all';
 
-export type ParamType = 'body' | 'query' | 'param' | 'header' | 'ctx' | 'req';
+export type ParamType = 'body' | 'query' | 'param' | 'header' | 'ctx' | 'req' | 'ctx.get';
 
 export type ParamDefinition = {
 	index: number;

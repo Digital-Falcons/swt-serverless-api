@@ -1,6 +1,5 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query } from 'swt-serverless-api';
+import { Body, CommonError, Controller, Delete, Get, HttpCode, Param, Post, Put, Query } from 'swt-serverless-api';
 import z from 'zod';
-import { CommonError } from '../../middlewares/error.middleware';
 import type { CreateTodoInput, PaginateInput, UpdateTodoInput } from './todo.dto';
 import { createTodoSchema, paginateSchema, updateTodoSchema } from './todo.dto';
 

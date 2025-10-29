@@ -8,7 +8,13 @@ const app = buildHonoApp([TodoController], {
 	topMiddlewares: [
 		{
 			path: '/int/*',
-			middlewares: [createBearerAuthMiddleware('BEARER_TOKEN')],
+			middlewares: [
+				createBearerAuthMiddleware('BEARER_TOKEN'),
+				(c, next) => {
+					c.set('appId', 'clgt');
+					return next();
+				},
+			],
 		},
 	],
 	notFoundHandler: async (c) => {

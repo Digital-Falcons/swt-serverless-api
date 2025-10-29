@@ -114,3 +114,9 @@ export function Req() {
 		addParamMetadata(target, propertyKey, { index: parameterIndex, type: 'req' });
 	};
 }
+
+export function CtxGet(key: string) {
+	return function (target: any, propertyKey: string | symbol, parameterIndex: number) {
+		addParamMetadata(target, propertyKey, { index: parameterIndex, type: 'ctx.get', name: key });
+	};
+}
