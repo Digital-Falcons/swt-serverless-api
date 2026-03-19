@@ -7,10 +7,12 @@ import { folderExists, mapSchemas } from './utils/common-utils.js';
 
 const argv = minimist(process.argv.slice(2));
 const outDir = argv.outDir || './generated';
-const introspectURL = argv.url || 'http://localhost:8787/introspect';
+const introspectPath = argv.url || '/introspect';
 const baseURL = argv.baseURL || 'http://localhost:8787';
 
-fetch(introspectURL)
+console.log(`\x1b[36m`, `Generating Bruno files from ${introspectPath} to ${outDir} with baseURL ${baseURL}`);
+
+fetch(`${baseURL}${introspectPath}`)
 	.then((res) => res.json() as Promise<IntrospectionObject[]>)
 	.then((introspectionObjects) => {
 		if (!folderExists(outDir)) {

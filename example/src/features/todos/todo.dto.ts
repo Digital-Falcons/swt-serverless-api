@@ -12,6 +12,7 @@ export const limit = z.coerce.number().min(1).max(100, 'Limit must be between 1 
 export const paginateSchema = z.object({
 	skip: skip,
 	limit: limit,
+	appId: z.string(),
 });
 
 export type PaginateInput = z.infer<typeof paginateSchema>;

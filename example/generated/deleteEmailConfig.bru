@@ -1,0 +1,16 @@
+meta {
+  name: "deleteEmailConfig"
+  type: "http"
+  seq: 5
+}
+
+delete {
+  url: http://localhost:9005/ext/email-configs/:id
+  body: json
+  auth: inherit
+}
+  
+
+
+
+

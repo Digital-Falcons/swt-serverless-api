@@ -1,0 +1,28 @@
+meta {
+  name: "createEmailConfig"
+  type: "http"
+  seq: 3
+}
+
+post {
+  url: http://localhost:9005/ext/email-configs
+  body: json
+  auth: inherit
+}
+  
+
+
+
+body:json {
+{
+  "appId": "\"lorem ipsum\"",
+  "owner": "\"lorem ipsum\"",
+  "smtpHost": "\"lorem ipsum\"",
+  "smtpPort": "248",
+  "smtpUser": "\"lorem ipsum\"",
+  "smtpPassword": "\"lorem ipsum\"",
+  "smtpSecure": "true",
+  "email": "\"lorem ipsum\""
+}
+}
+

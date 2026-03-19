@@ -1,0 +1,19 @@
+meta {
+  name: "getEmailConfigById"
+  type: "http"
+  seq: 2
+}
+
+get {
+  url: http://localhost:9005/ext/email-configs/:id?owner=%22lorem%20ipsum%22
+  body: json
+  auth: inherit
+}
+  
+
+params:query {
+  owner: "lorem ipsum"
+}
+
+
+

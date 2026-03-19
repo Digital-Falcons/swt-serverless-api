@@ -77,6 +77,14 @@ export function createRouteHandler(
 							}
 						} else {
 							const all = queryAll ?? c.req.queries();
+							// check every field in all, if it's an array with single value, convert to string
+							for (const key in all) {
+								const val = all[key];
+								if (Array.isArray(val) && val.length === 1) {
+									all[key] = val[0];
+								}
+							}
+
 							if (p.schema) {
 								args[p.index] = p.schema.parse(all);
 							} else {

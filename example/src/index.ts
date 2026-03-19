@@ -1,5 +1,4 @@
 import { WorkerEntrypoint } from 'cloudflare:workers';
-import 'reflect-metadata';
 import { buildHonoApp, createBearerAuthMiddleware } from 'swt-serverless-api';
 import { TodoController } from './features/todos/todo.controller';
 

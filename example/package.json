@@ -8,7 +8,7 @@
 		"start": "wrangler dev",
 		"test": "vitest",
 		"typegen": "wrangler types",
-		"gen-spec": "pnpm gen-bruno"
+		"gen-spec": "pnpm gen-bruno --baseURL 'http://localhost:9005'"
 	},
 	"devDependencies": {
 		"@cloudflare/vitest-pool-workers": "^0.8.19",

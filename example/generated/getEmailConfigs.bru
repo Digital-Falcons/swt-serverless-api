@@ -1,0 +1,24 @@
+meta {
+  name: "getEmailConfigs"
+  type: "http"
+  seq: 1
+}
+
+get {
+  url: http://localhost:9005/ext/email-configs?skip=248&limit=248&searchField=%22lorem%20ipsum%22&searchValue=%22lorem%20ipsum%22&sortField=%22lorem%20ipsum%22&sortOrder=%22lorem%20ipsum%22
+  body: json
+  auth: inherit
+}
+  
+
+params:query {
+  skip: 248
+  limit: 248
+  searchField: "lorem ipsum"
+  searchValue: "lorem ipsum"
+  sortField: "lorem ipsum"
+  sortOrder: "lorem ipsum"
+}
+
+
+

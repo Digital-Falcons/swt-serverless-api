@@ -1,0 +1,27 @@
+meta {
+  name: "updateEmailConfig"
+  type: "http"
+  seq: 4
+}
+
+put {
+  url: http://localhost:9005/ext/email-configs/:id
+  body: json
+  auth: inherit
+}
+  
+
+
+
+body:json {
+{
+  "id": "248",
+  "smtpHost": "\"lorem ipsum\"",
+  "smtpPort": "248",
+  "smtpUser": "\"lorem ipsum\"",
+  "smtpPassword": "\"lorem ipsum\"",
+  "smtpSecure": "true",
+  "email": "\"lorem ipsum\""
+}
+}
+
