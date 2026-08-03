@@ -15,10 +15,6 @@
 		".": {
 			"types": "./dist/index.d.ts",
 			"default": "./dist/index.js"
-		},
-		"./bootstraper/router": {
-			"types": "./dist/bootstraper/router.d.ts",
-			"default": "./dist/bootstraper/router.js"
 		}
 	},
 	"bin": {
