@@ -28,7 +28,7 @@ function methodToRegister(app: Hono, method: HttpMethod) {
 	}
 }
 
-export function buildHonoApp(controllers: AnyController[], options?: BuildOptions) {
+export function buildHonoApp(controllers: AnyController[], options?: BuildOptions): Hono {
 	const app = new Hono();
 
 	const introspectionArray: IntrospectionObject[] = [];

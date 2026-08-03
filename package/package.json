@@ -1,6 +1,6 @@
 {
 	"name": "swt-serverless-api",
-	"version": "0.0.8-beta",
+	"version": "0.0.9-beta",
 	"private": false,
 	"description": "Bootstrap a serverless API using Hono framework with TypeScript and Zod for validation.",
 	"licenses": [
@@ -10,6 +10,17 @@
 		}
 	],
 	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		},
+		"./bootstraper/router": {
+			"types": "./dist/bootstraper/router.d.ts",
+			"default": "./dist/bootstraper/router.js"
+		}
+	},
 	"bin": {
 		"gen-bruno": "./dist/cli/generate-bruno.js"
 	},
